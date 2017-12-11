@@ -1,0 +1,180 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<style>
+.msg {
+	color: #FFF;
+	font-size: 20px;
+}
+
+#frmFiltro table td {
+	border: 0px !important;
+}
+
+.ui-selectoneradio tbody tr td {
+	border: 0px !important;
+}
+
+.gridFiltro tbody tr td {
+	border: 0px !important;
+}
+
+.ui-datatable table tbody tr td {
+	word-wrap: break-word !important;
+}
+
+.ui-datatable .ui-datagrid-header, .ui-datatable .ui-datatable-header,
+	.ui-datatable .ui-datatable-subtable-header, .ui-datatable .ui-datatable-summaryrow
+	{
+	font-size: 12px;
+	padding: 2px 2px !important;
+}
+
+.ui-datatable-scrollable-header-box table thead tr th,
+	.ui-datatable-scrollable-footer-box table tfoot tr td {
+	font-size: 12px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-first, .ui-datatable .ui-paginator .ui-paginator-prev,
+	.ui-datatable .ui-paginator .ui-paginator-pages .ui-paginator-page,
+	.ui-datatable .ui-paginator .ui-paginator-next, .ui-datatable .ui-paginator .ui-paginator-last,
+	.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+	padding: 2px 3px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+}
+
+.ui-outputlabel {
+	font-size: 12px;
+}
+
+.ui-inputfield {
+	font-size: 12px;
+	padding: 2px !important;
+}
+
+.ui-selectoneradio label {
+	font-size: 12px;
+}
+
+.ui-panelgrid {
+	font-size: 12px;
+}
+
+.ui-panel .ui-panel-content {
+	font-size: 12px;
+}
+
+.ui-datatable table tbody td {
+	padding: 2px 1px !important;
+}
+
+.ui-selectonemenu-trigger .ui-icon-triangle-1-s,
+	.ui-selectcheckboxmenu-trigger .ui-icon-triangle-1-s {
+	margin-top: 4px !important;
+}
+
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td,
+	.ui-datatable table thead tr th {
+	padding: 1px !important;
+	font-size: 12px;
+}
+
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
+	padding: 1px !important;
+	font-size: 12px;
+}
+</style>
+		<div class="layout-portlets-box">
+			<div class="DispInlBlock TexAlLeft">
+				<div class="Fleft">
+					<h2 class="black Fs16 FontRalewayMedium">Refeição</h2>
+				</div>
+			</div>
+			<div class="Seperator"></div>
+			<div class="Container100 Responsive100">
+				<div class="ContainerIndent">
+					<h:form id="frmRefeicao">
+						<p:messages id="msg" showDetail="true" autoUpdate="true"
+							closable="true" escape="true" showSummary="false"
+							styleClass="Container80 Fnone MarAuto Fs18" />
+						<h:panelGrid>
+							<p:commandButton value="Adicionar"
+								oncomplete="PF('dlgNovo').show();" icon="fa fa-plus Fs16 white"
+								actionListener="#{refeicao.limpar()}" update="frmNovo" />
+						</h:panelGrid>
+						<br />
+						<p:dataTable id="tblRefeicao" var="ht"
+							value="#{refeicao.listaRefeicao}" rowKey="#{ht.id}"
+							paginator="true" style="font-size:12px;text-align:center;"
+							rows="20" rowsPerPageTemplate="20,50,100"
+							emptyMessage="Nenhuma refeição cadastrada!">
+							<f:facet name="header"> Refeição</f:facet>
+							<p:column headerText="Data">
+								<h:outputText value="#{ht.dataInclusao}">
+									<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Refeção">
+								<h:outputText value="#{ht.refeicao}" />
+							</p:column>
+							<p:column headerText="Calorias">
+								<h:outputText value="#{ht.calorias}">
+									<f:convertNumber type="currency" locale="pt" currencySymbol="" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<p:commandButton title="Alterar" icon="fa fa-pencil Fs16 white"
+									oncomplete="PF('dlgNovo').show();" update="frmNovo"
+									action="#{refeicao.carregar(ht)}" styleClass="btnLittle" />
+								<p:commandButton title="Excluir" icon="fa fa-trash Fs16 white"
+									action="#{refeicao.excluir(ht)}" ajax="false"
+									styleClass="btnLittle" style="margin-left:5px !important;" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<h:form id="frmNovo">
+						<p:dialog id="dlgNovo" widgetVar="dlgNovo" resizable="false"
+							modal="true" responsive="true" closeOnEscape="true"
+							header="Refeição">
+							<p:panel columns="1" styleClass="gridFiltro">
+								<h:panelGrid columns="2">
+									<p:outputLabel value="Refeição:" />
+									<p:selectOneMenu value="#{refeicao.refeicao.tipoRefeicao}"
+										style="width:200px;"
+										converter="omnifaces.SelectItemsConverter">
+										<f:selectItem itemLabel="Selecione" itemValue="" />
+										<f:selectItems value="#{refeicao.listaRefeicaoTipo}" var="a"
+											itemLabel="#{a.id} - #{a.tipoRefeicao}" itemValue="#{a.id}" />
+									</p:selectOneMenu>
+									<p:outputLabel value="Calorias:" />
+									<pe:inputNumber styleClass="calendar"
+										value="#{refeicao.refeicao.calorias}" decimalSeparator=","
+										thousandSeparator="." />
+									<p:outputLabel value="Data:" />
+									<p:calendar value="#{refeicao.refeicao.dataInclusao}"
+										locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"
+										styleClass="calendar" />
+								</h:panelGrid>
+								<hr />
+								<h:panelGrid style="text-align:center;" width="100%">
+									<p:commandButton value="Salvar" icon="fa fa-check Fs16 white"
+										action="#{refeicao.redirecionar()}"
+										actionListener="#{refeicao.salvar()}" ajax="false" />
+								</h:panelGrid>
+							</p:panel>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

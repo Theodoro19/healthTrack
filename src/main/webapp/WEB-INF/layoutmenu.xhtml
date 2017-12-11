@@ -1,0 +1,155 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ps="http://primefaces.org/spark"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<h:form id="frmMainMenu">
+		<style>
+@media only screen and (min-width: 960px) {
+	#frmMainMenu .menuCnd ul {
+		position: absolute;
+		margin-left: 200px;
+		float: left;
+		top: 0px !important;
+		border-radius: 3px;
+		width: 200px !important;
+		border-bottom: solid 5px #CA220A;
+	}
+	.menuDepartamentos ul {
+		width: 200px !important;
+	}
+}
+
+#layout-menu>li a {
+	font-size: 12px !important;
+}
+</style>
+		<ps:menu>
+			<f:facet name="options">
+			</f:facet>
+			<c:if
+				test="#{SessaoMB.verificarPessoa('Usuário')||SessaoMB.verificarPessoa('Admin')}">
+				<p:submenu label="Home" icon="fa fa-home" styleClass="subMenuHome" />
+				<p:separator />
+				<p:submenu label="Atividades" icon="fa fa-trophy"
+					styleClass="menuDepartamentos">
+					<p:menuitem value="Atividades Físicas" class="fa fa-chain"
+						url="/atividade/atividade-fisica.xhtml" />
+				</p:submenu>
+				<p:separator />
+				<p:submenu label="Refeições" icon="fa fa-truck"
+					sytleClass="menuDepartamentos">
+					<p:menuitem value="Refeições" class="fa fa-chain"
+						url="/refeicao/refeicao.xhtml" />
+				</p:submenu>
+				<p:separator />
+				<p:submenu label="Pressão" icon="fa fa-stethoscope"
+					styleClass="menuDepartamentos">
+					<p:menuitem value="Pressão" class="fa fa-chain"
+						url="/pressao/pressao.xhtml" />
+				</p:submenu>
+				<p:separator />
+				<p:submenu label="Peso" icon="fa fa-lemon-o"
+					sytleClass="menuDepartamentos">
+					<p:menuitem value="Peso" class="fa fa-chain" url="/peso/peso.xhtml" />
+				</p:submenu>
+
+				<p:separator />
+				<p:submenu label="Links Úteis" icon="fa fa-folder-open-o">
+					<p:menuitem value="Boa Forma" class="fa fa-chain"
+						onclick="window.open('https://boaforma.abril.com.br/fitness/', 'newwindow', 'width=800, height=600'); return false;" />
+					<p:menuitem value="Men's Health" class="fa fa-chain"
+						onclick="window.open('http://menshealth.pt/', 'newwindow', 'width=800, height=600'); return false;" />
+					<p:menuitem value="Minha Vida" class="fa fa-chain"
+						onclick="window.open('http://www.minhavida.com.br/', 'newwindow', 'width=800, height=600'); return false;" />
+				</p:submenu>
+			</c:if>
+			<p:submenu label="Colors" icon="fa fa-paint-brush" rendered="false">
+				<p:menuitem value="Green" icon="fa fa-paint-brush"
+					actionListener="#{themeView.change('green')}" ajax="false" />
+				<p:menuitem value="Blue" icon="fa fa-paint-brush"
+					actionListener="#{themeView.change('blue')}" ajax="false" />
+				<p:menuitem value="Orange" icon="fa fa-paint-brush"
+					actionListener="#{themeView.change('orange')}" ajax="false" />
+				<p:menuitem value="Red" icon="fa fa-paint-brush"
+					actionListener="#{themeView.change('red')}" ajax="false" />
+
+			</p:submenu>
+		</ps:menu>
+
+		<style>
+#layout-menu>li:nth-child(16) {
+	margin-top: 4px !important;
+}
+
+#frmMainMenu\3a gerentePrincipal_label {
+	color: #778D9B !important;
+}
+</style>
+
+		<script>
+			$(document)
+					.ready(
+							function() {
+								$(".subMenuHome")
+										.find("a")
+										.attr("href",
+												"#{facesContext.externalContext.applicationContextPath}/dashboard.xhtml");
+								$(".subMenuHome").find("a").attr("onclick", "");
+			});
+		</script>
+	</h:form>
+	<style>
+.frmMainMenu {
+	position: fixed;
+	top: 25px;
+	width: 100%;
+	z-index: 999;
+}
+
+.largura100 {
+	width: 100% !important;
+}
+
+.ui-dialog-minimized {
+	float: left !important;
+	left: 0px !important;
+	z-index: 9999;
+}
+</style>
+	<script>
+		$("document").ready(
+				function($) {
+					var nav = $('#frmMainMenu');
+					var elem = $(this);
+					$(window).scroll(function() {
+						if (elem.width() >= 944) {
+							if ($(this).scrollTop() > 54) {
+								nav.addClass("frmMainMenu");
+							} else {
+								nav.removeClass("frmMainMenu");
+							}
+						}
+					});
+
+					if (elem.width() >= 944) {
+						$(".menuCnd > a > .fa-chevron-down").addClass(
+								"fa-chevron-right");
+						$(".menuCnd  > a > .fa-chevron-down").removeClass(
+								"fa-chevron-down");
+
+						$(".liMenu > a > .fa-chevron-down").addClass(
+								"fa-chevron-right");
+						$(".liMenu  > a > .fa-chevron-down").removeClass(
+								"fa-chevron-down");
+					}
+				});
+
+		function atualizaAll() {
+			location.assign(location.href);
+		}
+	</script>
+	<ui:include src="/includes/mascara.xhtml" />
+</ui:composition>

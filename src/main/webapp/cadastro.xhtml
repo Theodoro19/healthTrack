@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>PrimeFaces Spark</title>
+	<h:outputScript name="js/layout.js" library="spark-layout" />
+
+	<h:outputText value="&lt;!--[if gte IE 9]&gt;" escape="false" />
+	<style type="text/css">
+/* styles for IE 9 */
+</style>
+	<h:outputText value="&lt;![endif]--&gt;" escape="false" />
+
+	<ui:insert name="head" />
+</h:head>
+
+<h:body>
+	<h:form>
+		<div id="layout-portlets-cover">
+			<div
+				class="other-pages-box Container40 Responsive50 MarAuto Fnone TexAlCenter ShadowGray MarTop10"
+				style="margin-top: 5%; background-repeat: no-repeat; background-position: center; background-size: cover; background-color: #FFF;">
+				<div class="Container90 Fnone MarAuto TexAlCenter">
+					<div class="EmptyBox50"></div>
+					<h:graphicImage name="images/HealthTrack.jpg" styleClass="Fleft"
+						style="width:180px;height:80px;" library="spark-layout"
+						class="MarAuto MarTop20 MarBot10" />
+					<div class="EmptyBox30"></div>
+					<h:panelGrid columns="2" class="MarAuto TexAlCenter">
+						<p:inputText value="#{cadastro.cadastro.nome}" placeholder="Nome"
+							style="width:140px;" maxlength="30" />
+						<p:inputText value="#{cadastro.cadastro.sobrenome}"
+							placeholder="Sobrenome" style="width:140px;" maxlength="50" />
+					</h:panelGrid>
+					<h:panelGrid columns="2" class="MarAuto TexAlCenter">
+						<p:inputText value="#{cadastro.cadastro.email}"
+							style="width:300px;" maxlength="60" placeholder="Email" />
+						<p:column />
+						<p:password id="pwd1" value="#{cadastro.cadastro.senha}"
+							style="width:300px;" maxlength="20" placeholder="Nova Senha"
+							autocomplete="false" match="pwd2"
+							validatorMessage="As senhas deverão ser iguais!"
+							promptLabel="Digita uma senha" goodLabel="Média" feedback="true"
+							weakLabel="Fraca" strongLabel="Forte" required="true"
+							requiredMessage="Preencha a senha!" />
+						<p:column />
+						<p:password id="pwd2" required="true" autocomplete="false"
+							feedback="true" promptLabel="Digite a mesma senha"
+							goodLabel="Média" weakLabel="Fraca" strongLabel="Forte"
+							requiredMessage="Preencha a senha!" style="width:300px;"
+							maxlength="20" placeholder="Repita a Senha" />
+					</h:panelGrid>
+					<h:panelGrid columns="2" class="MarAuto TexAlCenter">
+						<p:inputText value="#{cadastro.cadastro.altura}" maxlength="3"
+							placeholder="Altura (Inserir apenas números)" style="width:60px;" />
+						<pe:inputNumber value="#{cadastro.cadastro.pesoInicial}"
+							style="width:80px;" decimalSeparator="," thousandSeparator="." />
+					</h:panelGrid>
+					<h:panelGrid columns="1" class="MarAuto TexAlCenter">
+						<p:calendar value="#{cadastro.cadastro.dataNascimento}"
+							pattern="dd/MM/yyyy" locale="pt" timeZone="America/Sao_Paulo"
+							placeholder="Data de Nascimento" />
+						<p:selectOneRadio value="#{cadastro.cadastro.sexo}">
+							<f:selectItem itemLabel="Feminino" itemValue="F" />
+							<f:selectItem itemLabel="Masculino" itemValue="M" />
+						</p:selectOneRadio>
+					</h:panelGrid>
+					<h:panelGrid class="MarAuto TexAlCenter" columns="2">
+						<p:button value="Voltar" styleClass="Fs16 RedButton"
+							href="login.xhtml"></p:button>
+						<p:commandButton actionListener="#{cadastro.salvar()}"
+							ajax="false" value="Criar Conta"
+							action="#{cadastro.novoCadastro()}" />
+					</h:panelGrid>
+					<p:messages id="msg" showDetail="true" autoUpdate="true"
+						closable="true" escape="true" showSummary="false"
+						styleClass="Container80 Fnone MarAuto Fs18" />
+					<div class="Seperator"></div>
+					<div class="EmptyBox10"></div>
+					<div class="EmptyBox50"></div>
+				</div>
+			</div>
+		</div>
+	</h:form>
+
+	<h:outputStylesheet name="css/core-layout.css" library="spark-layout" />
+	<h:outputStylesheet name="css/font-awesome.css" library="spark-layout" />
+	<h:outputStylesheet name="css/animate.css" library="spark-layout" />
+	<h:outputStylesheet name="css/spark-layout.css" library="spark-layout" />
+</h:body>
+
+</html>

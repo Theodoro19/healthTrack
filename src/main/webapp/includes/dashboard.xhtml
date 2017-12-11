@@ -1,0 +1,263 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<style>
+.ui-datalist .ui-datalist-header {
+	padding: 1px 1px 1px 1px !important;
+	font-size: 14px;
+	background-color: #000;
+}
+
+.ui-outputlabel {
+	font-size: 13px;
+}
+
+div.magrezaGrave {
+	background: #00b7ff;
+	color: #00b7ff;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.magrezaModerada {
+	background: #008aff;
+	color: #008aff;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.magrezaLeve {
+	background: #06f;
+	color: #06f;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.saudavel {
+	background: #21ff00;
+	color: #21ff00;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.sobrepeso {
+	background: #fff300;
+	color: #fff300;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.obesidadeGrauI {
+	background: #ff7c7c;
+	color: #ff7c7c;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.obesidadeGrauII {
+	background: #ff5151;
+	color: #ff5151;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.obesidadeGrauIII {
+	background: #ff1200;
+	color: #ff1200;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+</style>
+	<h:outputStylesheet library="css" name="layout.css" />
+	<div class="layout-portlets-box">
+		<p:growl autoUpdate="true" life="3000" id="growl" />
+		<h:form>
+			<p:dashboard id="board" model="#{dashboard.model}">
+				<p:panel id="atividade">
+					<p:dataList value="#{atividade.dashboard}" var="a"
+						type="definition" emptyMessage="Nenhuma atividade cadastrada."
+						style="margin-left:50px;">
+						<f:facet name="header"> Atividade Física</f:facet>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Atividade:" />
+							<p:outputLabel value="#{a.atividade}" />
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+							<p:outputLabel value="Calorias:" />
+							<p:outputLabel value="#{a.calorias}">
+								<f:convertNumber type="currency" locale="pt" currencySymbol="" />
+							</p:outputLabel>
+							<p:outputLabel value="calorias" />
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Data:" />
+							<p:outputLabel value="#{a.dataInclusão}">
+								<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+									timeZone="America/Sao_Paulo" />
+							</p:outputLabel>
+						</h:panelGrid>
+						<hr />
+					</p:dataList>
+				</p:panel>
+
+				<p:panel id="refeicao" style="margin-left:50px;">
+					<p:dataList value="#{refeicao.dashboard}" var="a" type="definition"
+						emptyMessage="Nenhuma atividade cadastrada.">
+						<f:facet name="header"> Refeição</f:facet>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Refeição:" />
+							<p:outputLabel value="#{a.refeicao}" />
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+							<p:outputLabel value="Calorias:" />
+							<p:outputLabel value="#{a.calorias}">
+								<f:convertNumber type="currency" locale="pt" currencySymbol="" />
+							</p:outputLabel>
+							<p:outputLabel value="calorias" />
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Data:" />
+							<p:outputLabel value="#{a.dataInclusão}">
+								<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+									timeZone="America/Sao_Paulo" />
+							</p:outputLabel>
+						</h:panelGrid>
+						<hr />
+					</p:dataList>
+				</p:panel>
+
+				<p:panel id="peso" style="margin-left:50px;">
+					<p:dataList value="#{peso.dashboard}" var="a" type="definition"
+						emptyMessage="Nenhuma atividade cadastrada.">
+						<f:facet name="header"> Pressão</f:facet>
+						<h:panelGrid columns="3">
+							<p:outputLabel value="Peso:" />
+							<p:outputLabel value="#{a.peso}">
+								<f:convertNumber type="currency" locale="pt" currencySymbol="" />
+							</p:outputLabel>
+							<h:outputText value=" kg" />
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+							<p:outputLabel value="IMC:" />
+							<p:outputLabel value="#{a.imc}" />
+							<h:panelGrid rendered="#{a.imc lt 16}">
+								<div class="magrazaGrave"></div>
+							</h:panelGrid>
+							<h:panelGrid rendered="#{a.imc gt 16 and a.imc lt 17}">
+								<div class="magrazaModerada"></div>
+							</h:panelGrid>
+							<h:panelGrid rendered="#{a.imc gt 17 and a.imc lt 18.5}">
+								<div class="magrazaLeve"></div>
+							</h:panelGrid>
+							<h:panelGrid rendered="#{a.imc gt 18.5 and a.imc lt 25}">
+								<div class="saudavel"></div>
+							</h:panelGrid>
+							<h:panelGrid rendered="#{a.imc gt 25 and a.imc lt 30}">
+								<div class="sobrepeso"></div>
+							</h:panelGrid>
+							<h:panelGrid rendered="#{a.imc gt 30 and a.imc lt 35}">
+								<div class="obesidadeGrauI"></div>
+							</h:panelGrid>
+							<h:panelGrid rendered="#{a.imc gt 35 and a.imc lt 40}">
+								<div class="obesidadeGrauII"></div>
+							</h:panelGrid>
+							<h:panelGrid rendered="#{a.imc gt 40}">
+								<div class="obesidadeGrauIII"></div>
+							</h:panelGrid>
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Data:" />
+							<p:outputLabel value="#{a.dataAlteracao}">
+								<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+									timeZone="America/Sao_Paulo" />
+							</p:outputLabel>
+						</h:panelGrid>
+						<hr />
+					</p:dataList>
+				</p:panel>
+
+				<p:panel id="pressao" style="margin-left:50px;">
+					<p:dataList value="#{pressao.dashboard}" var="a" type="definition"
+						emptyMessage="Nenhuma atividade cadastrada.">
+						<f:facet name="header"> Pressão</f:facet>
+						<h:panelGrid columns="4">
+							<p:outputLabel value="Pressão:" />
+							<p:outputLabel value="#{a.primeiroValor}" />
+							<p:outputLabel value=" x " />
+							<p:outputLabel value="#{a.segundoValor}" />
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Data:" />
+							<p:outputLabel value="#{a.dataInclusao}">
+								<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+									timeZone="America/Sao_Paulo" />
+							</p:outputLabel>
+						</h:panelGrid>
+						<hr />
+					</p:dataList>
+				</p:panel>
+			</p:dashboard>
+			<div style="clear: both" />
+		</h:form>
+	</div>
+</ui:composition>

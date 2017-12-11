@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	<style>
+.ui-commandlink {
+	styleClass: Animated05 fa fa-sign-in;
+}
+
+#layout-topbar-menu {
+	max-width: 1200px !important;
+}
+</style>
+
+	<div id="layout-topbar" class="ShadowGray">
+
+		<div id="layout-topbar-indent">
+
+			<h:link outcome="/dashboard.xhtml?faces-redirect=true;">
+				<h:graphicImage name="HealthTrack.jpg" styleClass="Fleft"
+					library="imagens" id="logo" class="Fleft" width="140" heigth="80" />
+			</h:link>
+			<a href="#" id="mobile-menu-button"
+				class="BordRad3 white ShowOnMobile"><i class="fa fa-bars"></i>
+				Menu</a> <a href="#" id="mobile-menu-button-gray"
+				class="BordRad3 white ShowOnMobile"><i class="fa fa-caret-down"></i>
+				Top Menu</a>
+
+
+			<h:panelGroup id="topBarMenu" layout="block">
+
+				<ul id="layout-topbar-menu">
+
+
+					<c:if test="#{!SessaoMB.logado}">
+						<li><a
+							href="#{facesContext.externalContext.applicationContextPath}/login.xhtml"
+							class="Animated05"><i class="fa fa-sign-in"> </i> Login </a></li>
+					</c:if>
+
+					<c:if test="#{SessaoMB.logado}">
+						<li><a href="#" onclick="return logout();" class="Animated05"><i
+								class="fa fa-sign-in"> </i> Logout </a></li>
+					</c:if>
+
+					<c:if test="#{SessaoMB.logado}">
+						<li class="fa fa-ellipsis-v menu-separator"></li>
+						<li><a class="Animated05 CursPointer"> <i
+								class="fa fa-user"></i> #{SessaoMB.usuario.nome}, Bem vindo <i
+								class="fa fa-chevron-down Fs14 Fright ShowOnMobile"></i></a>
+							<ul style="width: 175px; margin-left: -10px;"
+								class="Animated03 submenu">
+								<li><a
+									href="#{facesContext.externalContext.applicationContextPath}/usuario/alterar-senha.xhtml"
+									class="Animated05"><i class="fa fa-magic"></i> Alterar
+										Dados </a></li>
+							</ul></li>
+					</c:if>
+
+					<c:if test="#{SessaoMB.verificarPessoa('Admin')}">
+						<li class="fa fa-ellipsis-v menu-separator"></li>
+
+						<li class="liAdmin"><a class="Animated05 CursPointer"> <i
+								class="fa fa-gear"></i> Administrador <i
+								class="fa fa-chevron-down Fs14 Fright ShowOnMobile"></i>
+						</a>
+							<ul style="width: 175px; margin-left: -10px;"
+								class="Animated03 submenu">
+
+								<li class="liMenu"><a class="Animated05 CursPointer"
+									href="#" onclick="return false;"> <i class="fa fa-user"></i>
+										Usuários<i class="fa Fs12 Fright fa-chevron-down"></i>
+								</a>
+									<ul class="sub-menu openSubMenu">
+										<li><a
+											href="#{facesContext.externalContext.applicationContextPath}/usuario/usuarios.xhtml"
+											class="Animated05"><i class="fa fa-users"></i> Usuários </a></li>
+										<li><a
+											href="#{facesContext.externalContext.applicationContextPath}/usuario/administradores.xhtml"
+											class="Animated05"><i class="fa fa-users"></i>
+												Administradores </a></li>
+									</ul></li>
+
+
+
+								<li class="liMenu"><a class="Animated05 CursPointer"
+									href="#" onclick="return false;"><i class="fa fa-sitemap"></i>
+										Cadastro <i class="fa Fs12 Fright fa-chevron-down"></i></a>
+									<ul class="sub-menu openSubMenu">
+										<li><a
+											href="#{facesContext.externalContext.applicationContextPath}/cadastro/refeicao-tipo.xhtml"
+											class="Animated05"><i class="fa fa-plus"></i> Novas
+												Refeições </a></li>
+
+										<li><a
+											href="#{facesContext.externalContext.applicationContextPath}/cadastro/atividade-tipo.xhtml"
+											class="Animated05"><i class="fa fa-plus"></i> Novas
+												Atividades </a></li>
+									</ul></li>
+							</ul></li>
+					</c:if>
+
+				</ul>
+
+			</h:panelGroup>
+
+		</div>
+	</div>
+
+	<style>
+.sub-menu {
+	margin-top: -44px !important;
+	display: none;
+	margin-left: 175px;
+	width: 175px;
+}
+
+.sub-menu>li {
+	background: #F1F6F9;
+	width: 175px;
+}
+
+#layout-topbar-menu>li:nth-child(5)>ul>li:hover>.sub-menu {
+	display: block;
+	opacity: 1 !important;
+	overflow: visible !important;
+}
+</style>
+
+	<h:form>
+		<p:remoteCommand name="logout" actionListener="#{login.logout()}"
+			update="@all" />
+	</h:form>
+</ui:composition>

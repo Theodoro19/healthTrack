@@ -1,0 +1,280 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<style>
+.msg {
+	color: #FFF;
+	font-size: 20px;
+}
+
+#frmFiltro table td {
+	border: 0px !important;
+}
+
+.ui-selectoneradio tbody tr td {
+	border: 0px !important;
+}
+
+.gridFiltro tbody tr td {
+	border: 0px !important;
+}
+
+.ui-datatable table tbody tr td {
+	word-wrap: break-word !important;
+}
+
+.ui-datatable .ui-datagrid-header, .ui-datatable .ui-datatable-header,
+	.ui-datatable .ui-datatable-subtable-header, .ui-datatable .ui-datatable-summaryrow
+	{
+	font-size: 12px;
+	padding: 2px 2px !important;
+}
+
+.ui-datatable-scrollable-header-box table thead tr th,
+	.ui-datatable-scrollable-footer-box table tfoot tr td {
+	font-size: 12px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-first, .ui-datatable .ui-paginator .ui-paginator-prev,
+	.ui-datatable .ui-paginator .ui-paginator-pages .ui-paginator-page,
+	.ui-datatable .ui-paginator .ui-paginator-next, .ui-datatable .ui-paginator .ui-paginator-last,
+	.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+	padding: 2px 3px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+}
+
+.ui-outputlabel {
+	font-size: 12px;
+}
+
+.ui-inputfield {
+	font-size: 12px;
+	padding: 2px !important;
+}
+
+.ui-selectoneradio label {
+	font-size: 12px;
+}
+
+.ui-panelgrid {
+	font-size: 12px;
+}
+
+.ui-panel .ui-panel-content {
+	font-size: 12px;
+}
+
+.ui-datatable table tbody td {
+	padding: 2px 1px !important;
+}
+
+.ui-selectonemenu-trigger .ui-icon-triangle-1-s,
+	.ui-selectcheckboxmenu-trigger .ui-icon-triangle-1-s {
+	margin-top: 4px !important;
+}
+
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td,
+	.ui-datatable table thead tr th {
+	padding: 1px !important;
+	font-size: 12px;
+}
+
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
+	padding: 1px !important;
+	font-size: 12px;
+}
+
+div.magrezaGrave {
+	background: #00b7ff;
+	color: #00b7ff;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.magrezaModerada {
+	background: #008aff;
+	color: #008aff;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.magrezaLeve {
+	background: #06f;
+	color: #06f;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.saudavel {
+	background: #21ff00;
+	color: #21ff00;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.sobrepeso {
+	background: #fff300;
+	color: #fff300;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.obesidadeGrauI {
+	background: #ff7c7c;
+	color: #ff7c7c;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.obesidadeGrauII {
+	background: #ff5151;
+	color: #ff5151;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+div.obesidadeGrauIII {
+	background: #ff1200;
+	color: #ff1200;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+</style>
+		<div class="layout-portlets-box">
+			<div class="DispInlBlock TexAlLeft">
+				<div class="Fleft">
+					<h2 class="black Fs16 FontRalewayMedium">Peso</h2>
+				</div>
+			</div>
+			<div class="Seperator"></div>
+			<div class="Container100 Responsive100">
+				<div class="ContainerIndent">
+					<h:form id="frmPeso">
+						<p:messages id="msg" showDetail="true" autoUpdate="true"
+							closable="true" escape="true" showSummary="false"
+							styleClass="Container80 Fnone MarAuto Fs18" />
+						<h:panelGrid>
+							<p:commandButton value="Adicionar"
+								oncomplete="PF('dlgNovo').show();" icon="fa fa-plus Fs16 white"
+								actionListener="#{peso.limpar()}" update="frmNovo" />
+						</h:panelGrid>
+						<br />
+						<p:dataTable id="tblPeso" var="ht"
+							value="#{peso.listarPesoUsuario}" rowKey="#{ht.id}"
+							paginator="true" style="font-size:12px;text-align:center;"
+							rows="20" rowsPerPageTemplate="20,50,100"
+							emptyMessage="Nenhum peso cadastrado!">
+							<f:facet name="header">Peso</f:facet>
+							<p:column headerText="Data">
+								<h:outputText value="#{ht.dataAlteracao}">
+									<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Peso">
+								<h:outputText value="#{ht.peso}">
+									<f:convertNumber type="currency" locale="pt" currencySymbol="" />
+								</h:outputText>
+								<h:outputText value=" kg" />
+							</p:column>
+							<p:column>
+								<p:commandButton title="Alterar" icon="fa fa-pencil Fs16 white"
+									oncomplete="PF('dlgNovo').show();" update="frmNovo"
+									action="#{peso.carregar(ht)}" styleClass="btnLittle" />
+								<p:commandButton title="Excluir" icon="fa fa-trash Fs16 white"
+									action="#{peso.excluir(ht)}" ajax="false"
+									styleClass="btnLittle" style="margin-left:5px !important;" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<h:form id="frmNovo">
+						<p:dialog id="dlgNovo" widgetVar="dlgNovo" resizable="false"
+							modal="true" responsive="true" closeOnEscape="true" header="Peso">
+							<p:panel columns="1" styleClass="gridFiltro">
+								<h:panelGrid columns="2">
+									<p:outputLabel value="Peso:" />
+									<pe:inputNumber value="#{peso.peso.peso}" decimalSeparator=","
+										thousandSeparator="." />
+									<p:outputLabel value="Data:" />
+									<p:calendar value="#{peso.peso.dataAlteracao}" locale="pt"
+										timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"
+										styleClass="calendar" />
+								</h:panelGrid>
+								<hr />
+								<h:panelGrid style="text-align:center;" width="100%">
+									<p:commandButton value="Salvar" icon="fa fa-check Fs16 white"
+										action="#{peso.redirecionar()}"
+										actionListener="#{peso.salvar()}" ajax="false" />
+								</h:panelGrid>
+							</p:panel>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

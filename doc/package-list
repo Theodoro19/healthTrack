@@ -1,0 +1,11 @@
+br.com.ht.dao
+br.com.ht.entidades
+br.com.ht.filters
+br.com.ht.interfaces
+br.com.ht.managedbeans
+br.com.ht.util
+org.primefaces.spark
+org.primefaces.spark.domain
+org.primefaces.spark.service
+org.primefaces.spark.view
+org.primefaces.spark.view.data

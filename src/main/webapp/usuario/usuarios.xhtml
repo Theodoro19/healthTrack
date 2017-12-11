@@ -1,0 +1,139 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<style>
+.msg {
+	color: #FFF;
+	font-size: 20px;
+}
+
+#frmFiltro table td {
+	border: 0px !important;
+}
+
+.ui-selectoneradio tbody tr td {
+	border: 0px !important;
+}
+
+.gridFiltro tbody tr td {
+	border: 0px !important;
+}
+
+.ui-datatable table tbody tr td {
+	word-wrap: break-word !important;
+}
+
+.ui-datatable .ui-datagrid-header, .ui-datatable .ui-datatable-header,
+	.ui-datatable .ui-datatable-subtable-header, .ui-datatable .ui-datatable-summaryrow
+	{
+	font-size: 12px;
+	padding: 2px 2px !important;
+}
+
+.ui-datatable-scrollable-header-box table thead tr th,
+	.ui-datatable-scrollable-footer-box table tfoot tr td {
+	font-size: 12px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-first, .ui-datatable .ui-paginator .ui-paginator-prev,
+	.ui-datatable .ui-paginator .ui-paginator-pages .ui-paginator-page,
+	.ui-datatable .ui-paginator .ui-paginator-next, .ui-datatable .ui-paginator .ui-paginator-last,
+	.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+	padding: 2px 3px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+}
+
+.ui-outputlabel {
+	font-size: 12px;
+}
+
+.ui-inputfield {
+	font-size: 12px;
+	padding: 2px !important;
+}
+
+.ui-selectoneradio label {
+	font-size: 12px;
+}
+
+.ui-panelgrid {
+	font-size: 12px;
+}
+
+.ui-panel .ui-panel-content {
+	font-size: 12px;
+}
+
+.ui-datatable table tbody td {
+	padding: 2px 1px !important;
+}
+
+.ui-selectonemenu-trigger .ui-icon-triangle-1-s,
+	.ui-selectcheckboxmenu-trigger .ui-icon-triangle-1-s {
+	margin-top: 4px !important;
+}
+
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td,
+	.ui-datatable table thead tr th {
+	padding: 1px !important;
+	font-size: 12px;
+}
+
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
+	padding: 1px !important;
+	font-size: 12px;
+}
+</style>
+		<div class="layout-portlets-box">
+			<div class="DispInlBlock TexAlLeft">
+				<div class="Fleft">
+					<h2 class="black Fs16 FontRalewayMedium">Usuários</h2>
+				</div>
+			</div>
+			<div class="Seperator"></div>
+			<div class="Container100 Responsive100">
+				<div class="ContainerIndent">
+					<h:form id="frmUsuarios"
+						rendered="#{SessaoMB.verificarPessoa('Admin')}">
+						<p:dataTable value="#{cadastro.listaUsuario}" var="c"
+							rowKey="#{c}" rows="50" rowsPerPageTemplate="50,100,200"
+							paginator="true" style="font-size:12px;text-align:center;"
+							emptyMessage="Nenhum usuário cadastrado!" id="tblUsuarios">
+							<f:facet name="header">Usuários Cadastrados</f:facet>
+							<p:column headerText="Nome">
+								<h:outputText value="#{c.nome} #{c.sobrenome}" />
+							</p:column>
+							<p:column headerText="Data Nascimento">
+								<h:outputText value="#{c.dataNascimento}">
+									<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Sexo">
+								<h:outputText value="Masculino" rendered="#{c.sexo eq 'M'}" />
+								<h:outputText value="Feminino" rendered="#{c.sexo eq 'F'}" />
+							</p:column>
+							<p:column headerText="E-mail">
+								<h:outputText value="#{c.email}" />
+							</p:column>
+							<p:column headerText="Data Cadastro">
+								<h:outputText value="#{c.dataCadastro}">
+									<f:convertDateTime locale="pt" pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

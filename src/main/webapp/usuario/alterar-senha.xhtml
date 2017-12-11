@@ -1,0 +1,203 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<style>
+.msg {
+	color: #FFF;
+	font-size: 20px;
+}
+
+#frmFiltro table td {
+	border: 0px !important;
+}
+
+.ui-selectoneradio tbody tr td {
+	border: 0px !important;
+}
+
+.gridFiltro tbody tr td {
+	border: 0px !important;
+}
+
+.ui-datatable table tbody tr td {
+	word-wrap: break-word !important;
+}
+
+.ui-datatable .ui-datagrid-header, .ui-datatable .ui-datatable-header,
+	.ui-datatable .ui-datatable-subtable-header, .ui-datatable .ui-datatable-summaryrow
+	{
+	font-size: 12px;
+	padding: 2px 2px !important;
+}
+
+.ui-datatable-scrollable-header-box table thead tr th,
+	.ui-datatable-scrollable-footer-box table tfoot tr td {
+	font-size: 12px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-first, .ui-datatable .ui-paginator .ui-paginator-prev,
+	.ui-datatable .ui-paginator .ui-paginator-pages .ui-paginator-page,
+	.ui-datatable .ui-paginator .ui-paginator-next, .ui-datatable .ui-paginator .ui-paginator-last,
+	.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+	padding: 2px 3px;
+}
+
+.ui-datatable .ui-paginator .ui-paginator-rpp-options {
+	font-size: 12px;
+}
+
+.ui-outputlabel {
+	font-size: 12px;
+}
+
+.ui-inputfield {
+	font-size: 12px;
+	padding: 2px !important;
+}
+
+.ui-selectoneradio label {
+	font-size: 12px;
+}
+
+.ui-panelgrid {
+	font-size: 12px;
+}
+
+.ui-panel .ui-panel-content {
+	font-size: 12px;
+}
+
+.ui-datatable table tbody td {
+	padding: 2px 1px !important;
+}
+
+.ui-selectonemenu-trigger .ui-icon-triangle-1-s,
+	.ui-selectcheckboxmenu-trigger .ui-icon-triangle-1-s {
+	margin-top: 4px !important;
+}
+
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td,
+	.ui-datatable table thead tr th {
+	padding: 1px !important;
+	font-size: 12px;
+}
+
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-label {
+	padding: 1px !important;
+	font-size: 12px;
+}
+</style>
+		<div class="layout-portlets-box">
+			<div class="DispInlBlock TexAlLeft">
+				<div class="Fleft">
+					<h2 class="black Fs18 FontRalewayMedium">Alterar Dados</h2>
+				</div>
+			</div>
+			<div class="Seperator"></div>
+			<div class="Container50 Responsive50">
+				<div class="ContainerIndent">
+					<f:metadata>
+						<f:event listener="#{cadastro.pesquisaIdSelecionado()}"
+							type="preRenderView" />
+					</f:metadata>
+					<h:form id="frmAlterarDados">
+						<p:messages id="msg" showDetail="true" autoUpdate="true"
+							closable="true" escape="true" showSummary="false" />
+						<p:panelGrid columns="1" styleClass="gridFiltro">
+							<f:facet name="header">
+								<h:outputText value="Dados" />
+							</f:facet>
+							<h:panelGrid style="text-align:center;" width="100%">
+								<p:imageSwitch effect="fade">
+									<ui:repeat var="i" value="#{SessaoMB.listaImagem}">
+										<p:graphicImage value="#{imgMB.foto2}" width="150"
+											height="100" styleClass="fotoCadastro" cache="false">
+											<f:param name="id" value="#{i.idCadastro}" />
+										</p:graphicImage>
+									</ui:repeat>
+								</p:imageSwitch>
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<p:outputLabel value="Adicionar/ Alterar Foto?" />
+								<p:selectBooleanCheckbox value="#{cadastro.enviarFoto}">
+									<p:ajax update="enviarFoto" />
+								</p:selectBooleanCheckbox>
+							</h:panelGrid>
+							<h:panelGrid columns="2" id="enviarFoto">
+								<p:fileUpload fileUploadListener="#{cadastro.salvarFoto}"
+									mode="advanced" dragDropSupport="true"
+									invalidFileMessage="Arquivo inválido!"
+									fileLimitMessage="A foto ultrapassou o limite permitido de 5MB"
+									sizeLimit="5000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									multiple="false" process="@this" label="Enviar"
+									update=":frmAlterarDados"
+									rendered="#{cadastro.enviarFoto eq true}" />
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<p:outputLabel value="Nome:" />
+								<p:column>
+									<p:outputLabel value="#{SessaoMB.usuario.nome} " />
+									<p:outputLabel value="#{SessaoMB.usuario.sobrenome}" />
+								</p:column>
+								<p:outputLabel value="Data de Nascimento:" />
+								<p:outputLabel value="#{SessaoMB.usuario.dataNascimento}">
+									<f:convertDateTime timeZone="America/Sao_Paulo" locale="pt"
+										pattern="dd/MM/yyyy" />
+								</p:outputLabel>
+								<p:outputLabel value="Sexo:" />
+								<p:outputLabel value="Masculino"
+									rendered="#{SessaoMB.usuario.sexo eq 'M'}" />
+								<p:outputLabel value="Feminino"
+									rendered="#{SessaoMB.usuario.sexo eq 'F'}" />
+								<p:outputLabel value="Altura:" />
+								<p:column>
+									<p:outputLabel value="#{SessaoMB.usuario.altura}" />
+									<p:outputLabel value=" cm" />
+								</p:column>
+								<p:outputLabel value="E-mail:" />
+								<p:outputLabel value="#{SessaoMB.usuario.email}" />
+								<p:outputLabel value="Alterar Senha?" />
+								<p:selectBooleanCheckbox value="#{cadastro.alterarSenha}">
+									<p:ajax update="alterarSenha" />
+								</p:selectBooleanCheckbox>
+							</h:panelGrid>
+							<h:panelGrid columns="2" id="alterarSenha">
+								<p:outputLabel value="Nova Senha:"
+									rendered="#{cadastro.alterarSenha eq true}" />
+								<p:password id="pwd1" value="#{cadastro.cadastroBEAN.senha}"
+									validatorMessage="As senhas deverão ser iguais!"
+									autocomplete="false" match="pwd2"
+									promptLabel="Digite a nova Senha" goodLabel="Média"
+									feedback="true" weakLabel="Fraca" strongLabel="Forte"
+									required="true" requiredMessage="Preencha a senha!"
+									maxlength="20" rendered="#{cadastro.alterarSenha eq true}"
+									style="margin-left:45px;" />
+								<p:column />
+								<p:password id="pwd2" required="true" autocomplete="false"
+									feedback="true" promptLabel="Digite a mesma senha"
+									goodLabel="Média" weakLabel="Fraca" strongLabel="Forte"
+									requiredMessage="Preencha a senha!"
+									rendered="#{cadastro.alterarSenha eq true}"
+									style="margin-left:45px;" />
+							</h:panelGrid>
+							<hr />
+							<h:panelGrid style="text-align:center;" width="100%" columns="2">
+								<p:commandButton value="Voltar"
+									icon="fa fa-arrow-left Fs16 white"
+									action="#{cadastro.redirecionar()}" ajax="false"/>
+								<p:commandButton value="Salvar" icon="fa fa-check Fs16 white"
+									ajax="false" actionListener="#{cadastro.alterarSenha()}" />
+							</h:panelGrid>
+						</p:panelGrid>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

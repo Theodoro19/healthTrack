@@ -1,0 +1,12 @@
+{
+  "libs": [
+    "ecma5",
+    "browser"
+  ],
+  "plugins": {
+    "angular": {
+      
+    }
+  },
+  "ecmaVersion": 5
+}
